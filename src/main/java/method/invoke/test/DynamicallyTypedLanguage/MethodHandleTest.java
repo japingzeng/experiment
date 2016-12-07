@@ -1,4 +1,4 @@
-package experiment.vmTest.methodHandleTest;
+package method.invoke.test.DynamicallyTypedLanguage;
 
 import java.lang.invoke.MethodHandle;
 import static java.lang.invoke.MethodHandles.lookup;
@@ -9,7 +9,7 @@ import java.lang.invoke.MethodType;
  * @ClassName: MethodHandleTest 
  * @Description: TODO(这里用一句话描述这个类的作用) 
  * @author japing 
- * @date 2016年9月13日 下午4:13:28 
+ * @date 2016年12月1日 上午11:33:04 
  *
  */
 public class MethodHandleTest {

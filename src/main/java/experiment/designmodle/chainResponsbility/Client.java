@@ -13,4 +13,8 @@ public class Client {
 		
 		handler1.handleRequest(request);
 	}
+	
+//	private abstract class Testss {
+//		public abstract void test();
+//	}
 }
