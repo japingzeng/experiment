@@ -2,7 +2,7 @@ package experiment.vmTest.dynamicProxy;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import sun.misc.ProxyGenerator;
+//import sun.misc.ProxyGenerator;
 /**
  * 
  * @ClassName: ProxyUtils 
@@ -24,13 +24,13 @@ public class ProxyUtils {
 	public static void generateClassFile(String path, Class<?> [] interfaces, String ProxyName) {
 		//根据类型信息和提供的代理类名称生成字节码
 
-		byte[] sourcefile = ProxyGenerator.generateProxyClass(ProxyName, interfaces);
+//		byte[] sourcefile = ProxyGenerator.generateProxyClass(ProxyName, interfaces);
 		FileOutputStream  out = null;
 		try {
 		//	String filePath = "F:/temp" + "/" + ProxyName + ".class";
 			String filePath = path + ProxyName + ".class";
 			out = new FileOutputStream(filePath);
-			out.write(sourcefile);
+//			out.write(sourcefile);
 			out.flush();
 		} catch (Exception e) {
 			e.printStackTrace();
