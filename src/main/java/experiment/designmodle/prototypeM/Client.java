@@ -8,8 +8,8 @@ public class Client {
 			clonecp.show();
 		}
 		
-		while (true) {
-			System.out.println("test jps jstat");
-		}
+//		while (true) {
+//			System.out.println("test jps jstat");
+//		}
 	}
 }

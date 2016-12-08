@@ -12,6 +12,6 @@ public class Client {
 		Class<?> [] interfaces = {IHello.class};
 		IHello hello = new Hello();
 		String path = hello.getClass().getResource(".").getPath();
-		ProxyUtils.generateClassFile(path, interfaces, "helloProxy");
+//		ProxyUtils.generateClassFile(path, interfaces, "helloProxy");
 	}
 }
