@@ -199,4 +199,10 @@ public class timetest {
 		 
 		 return num;
 	 }
+	 
+	 /**
+	  *  使用 LRANGE list1 0 -1 获取redis中存储的所有服务器ip对应的编号0-127
+	  *  
+	  *  RPUSH mylist "hello" 往该列表里存入当前服务器ip对应的编号，该编号是经过hash得到，得到该编号后与从redis拉取到的list进行contains操作，如果包含，进行加一操作
+	  */
 }
