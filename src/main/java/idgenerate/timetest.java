@@ -7,12 +7,10 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
-
-import org.springframework.beans.factory.annotation.Value;
-
-import com.fasterxml.jackson.databind.ser.std.InetAddressSerializer;
-import com.mysql.fabric.xmlrpc.base.Array;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
 
 public class timetest {
@@ -43,8 +41,24 @@ public class timetest {
 //	    Integer a = 0x1 ^ 0x0111;
 //	    System.out.println(Integer.toBinaryString(a));
 	    
-	    
-	    
+//	    FutureTask<String> vFutureTask = new FutureTask<>(new Callable<String>() {
+//
+//			@Override
+//			public String call() throws Exception {
+//				// TODO Auto-generated method stub
+//				return "hello";
+//			}
+//		});
+//	    vFutureTask.run();
+//	    try {
+//			String result = vFutureTask.get();
+//		} catch (InterruptedException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		} catch (ExecutionException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 	    
 	    try {
 			
