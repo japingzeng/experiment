@@ -14,11 +14,10 @@ import java.net.UnknownHostException;
 import java.util.Enumeration;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class UUIDGen {
+public class TimeServerNumGen {
 	private static AtomicLong lastTime = new AtomicLong(-9223372036854775808L);
     private static String macAddress = null;
-    private static long clockSeqAndNode = -9223372036854775808L;
-//    private static volatile long lastTime = -1L;
+    private static long serverFlagId = -9223372036854775808L;
     private static long sequenceIdBits = 22;
     private static long sequenceIdMask = -1L ^ (-1L << sequenceIdBits);
     /**
@@ -26,37 +25,12 @@ public class UUIDGen {
 	 */
 	private static AtomicLong sequenceId = new AtomicLong(0L);
 
-    public UUIDGen() {
+    public TimeServerNumGen() {
     }
 
-    public static long getClockSeqAndNode() {
-        return clockSeqAndNode;
+    public static long getserverFlagId() {
+        return serverFlagId;
     }
-
-//    public static long newTime() {
-//        return createTime(System.currentTimeMillis());
-//    }
-
-//    public static long createTime(long currentTimeMillis) {
-//        long timeMillis = currentTimeMillis * 10000L + 122192928000000000L;
-//
-//        while(true) {
-//            long current = lastTime.get();
-//            if(timeMillis > current) {
-//                if(lastTime.compareAndSet(current, timeMillis)) {
-//                    break;
-//                }
-//            } else if(lastTime.compareAndSet(current, current + 1L)) {
-//                timeMillis = current + 1L;
-//                break;
-//            }
-//        }
-//
-//        long time = timeMillis << 32;
-//        time |= (timeMillis & 281470681743360L) >> 16;
-//        time |= 4096L | timeMillis >> 48 & 4095L;
-//        return time;
-//    }
     
     public static long createTime() {
     	long currentTime;
@@ -98,8 +72,7 @@ public class UUIDGen {
     	}
     	//拼接时间 + 毫秒内的序列id currentSequenceId
     	long result = (currentTime << sequenceIdBits) | currentSequenceId;
-    	
-    	return currentSequenceId;
+    	return result;
     }
     
  
@@ -130,7 +103,7 @@ public class UUIDGen {
     static {
         try {
             Class.forName("java.net.InterfaceAddress");
-            macAddress = Class.forName(UUIDGen.class.getSimpleName() + "$HardwareAddressLookup").newInstance().toString();
+            macAddress = Class.forName(TimeServerNumGen.class.getSimpleName() + "$HardwareAddressLookup").newInstance().toString();
         } catch (ExceptionInInitializerError var17) {
             ;
         } catch (ClassNotFoundException var18) {
@@ -195,20 +168,20 @@ public class UUIDGen {
         }
 
         if(macAddress != null) {
-            clockSeqAndNode |= Hex.parseLong(macAddress);
+            serverFlagId |= Hex.parseLong(macAddress);
         } else {
             try {
                 byte[] ex2 = InetAddress.getLocalHost().getAddress();
-                clockSeqAndNode |= (long)(ex2[0] << 24) & 4278190080L;
-                clockSeqAndNode |= (long)(ex2[1] << 16 & 16711680);
-                clockSeqAndNode |= (long)(ex2[2] << 8 & '\uff00');
-                clockSeqAndNode |= (long)(ex2[3] & 255);
+                serverFlagId |= (long)(ex2[0] << 24) & 4278190080L;
+                serverFlagId |= (long)(ex2[1] << 16 & 16711680);
+                serverFlagId |= (long)(ex2[2] << 8 & '\uff00');
+                serverFlagId |= (long)(ex2[3] & 255);
             } catch (UnknownHostException var16) {
-                clockSeqAndNode |= (long)(Math.random() * 2.147483647E9D);
+                serverFlagId |= (long)(Math.random() * 2.147483647E9D);
             }
         }
 
-        clockSeqAndNode |= (long)(Math.random() * 16383.0D) << 48;
+        serverFlagId |= (long)(Math.random() * 16383.0D) << 48;
     }
 
     static class HardwareAddressLookup {
