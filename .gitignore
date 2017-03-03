@@ -1,1 +1,9 @@
-/target/
+target/
+.project
+.settings/
+.classpath
+.idea/
+*.iml
+rebel.xml
+.gitignore
+.externalToolBuilders/
