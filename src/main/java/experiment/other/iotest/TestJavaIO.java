@@ -1,4 +1,4 @@
-package experiment.other;
+package experiment.other.iotest;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -47,8 +47,10 @@ public class TestJavaIO {
                 System.out.println(item.getAbsolutePath());
                 System.out.println(item.getCanonicalPath());
                 System.out.println(item.getPath());
+                System.out.println("====================================");
                 System.out.println(item.getName());
                 String subpath = args + "\\" + item.getName();
+
                 printFile(subpath);
             }
         }
@@ -57,8 +59,8 @@ public class TestJavaIO {
     public static void printFile2(String path) {
        try {
            String pathStr = "experiment.other";
-           String pathStr2 = pathStr.replaceAll("\\.", "/");
-           Enumeration<URL> enumerations = getClassLoader().getResources(("experiment/other"));
+           String pathStr2 = pathStr.replace(".", "/");
+           Enumeration<URL> enumerations = getClassLoader().getResources(pathStr2);
            if (null != enumerations) {
                while (enumerations.hasMoreElements()) {
                    URL url = enumerations.nextElement();
@@ -66,7 +68,7 @@ public class TestJavaIO {
                    if ("file".equals(protocol)) {
                        System.out.println(url.getPath());
                        System.out.println(url.getFile());
-                       printFile(path);
+                       printFile(url.getPath());
                    }
                }
            }

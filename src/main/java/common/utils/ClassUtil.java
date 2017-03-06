@@ -37,7 +37,7 @@ public class ClassUtil {
             return null;
         }
        try {
-           Enumeration<URL> urls = getClassLoader().getResources(packageName.replaceAll(".", "/"));
+           Enumeration<URL> urls = getClassLoader().getResources(packageName.replace(".", "/"));
            while (urls.hasMoreElements()) {
                URL url = urls.nextElement();
                if (null != url) {
