@@ -1,10 +1,10 @@
 package experiment.other.iotest;
 
-import java.io.File;
-import java.io.FileFilter;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 
 /**
  * @Author japing
@@ -22,6 +22,8 @@ public class TestJavaIO {
             if (null != args) {
                 printFile2(args[0]);
             }
+            System.out.println("======================================================");
+            readDataFromLocal("E:\\test\\Test.txt");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -78,6 +80,36 @@ public class TestJavaIO {
     }
     public static ClassLoader getClassLoader() {
         return Thread.currentThread().getContextClassLoader();
+    }
+
+    public static void readDataFromLocal(String path) {
+        BufferedInputStream bufferedInputStream = null;
+        BufferedReader bufferedReader = null;
+
+        FileInputStream fis = null;
+        BufferedReader br = null;
+        List<String> lines = new ArrayList<>();
+        BufferedReader br1= null;
+        try{
+            fis = new FileInputStream(path);
+            br = new BufferedReader(new InputStreamReader(fis, "UTF-8"));
+            String str = "";
+            while ((str = br.readLine()) != null) {
+                lines.add(str);
+            }
+            for (String item : lines) {
+                System.out.println(item);
+            }
+        } catch (IOException e) {
+
+       } finally {
+           try {
+               br.close();
+           } catch (Exception e) {
+
+           }
+       }
+
     }
 
 }
