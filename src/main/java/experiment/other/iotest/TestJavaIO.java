@@ -3,6 +3,7 @@ package experiment.other.iotest;
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * @Description:
  */
 public class TestJavaIO {
-
+    private static final String dateFomat = "yyyyMMdd";
     public static void main(String[] args) {
         try {
             if (null != args) {
@@ -54,6 +55,10 @@ public class TestJavaIO {
                 String subpath = args + "\\" + item.getName();
 
                 printFile(subpath);
+
+                System.out.println(DateUtil.dateToString(new Date(), dateFomat));
+                String rowKey = "-" + DateUtil.dateToString(new Date(), dateFomat) + "-" + String.valueOf(System.currentTimeMillis());
+                System.out.println(rowKey);
             }
         }
     }
@@ -92,6 +97,21 @@ public class TestJavaIO {
         BufferedReader br1= null;
         try{
             fis = new FileInputStream(path);
+            byte[] encode = new byte[3];
+            String charSet = "gb2312";
+            if (null != encode) {
+                if (-1 != fis.read(encode)) {
+                    if(encode[0]==-17 && encode[1]==-69 && encode[2] ==-65) {
+                        charSet = "UTF-8";
+                    } else if (encode[0] == -1 && encode[1] == -2 ) {
+                        charSet = "UTF-16";
+                    } else if (encode[0] == -2 && encode[1] == -1 ) {
+                        charSet = "Unicode";
+                    }
+                }
+            }
+            System.out.println(charSet);
+            FileReader fileReader = new FileReader(path);
             br = new BufferedReader(new InputStreamReader(fis, "UTF-8"));
             String str = "";
             while ((str = br.readLine()) != null) {

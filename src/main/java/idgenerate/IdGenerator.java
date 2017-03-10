@@ -1,6 +1,7 @@
 package idgenerate;
 
 import idgenerate.util.DateUtils;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * 
@@ -24,7 +25,7 @@ public class IdGenerator {
 	/**
 	 * 具体服务器id
 	 */
-	private long serverId;
+	private long serverId = 1L;
 	/**
 	 * 服务器id所占bit位数
 	 */
@@ -32,7 +33,7 @@ public class IdGenerator {
 	/**
 	 * 业务线id
 	 */
-	private long taskId;
+	private long taskId = 1L;
 	/**
 	 * 业务线id所占bits位数
 	 */

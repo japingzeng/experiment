@@ -4,6 +4,8 @@ import idgenerate.util.DateUtils;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,9 +16,17 @@ import java.util.concurrent.FutureTask;
 
 
 public class timetest {
-	private static final String datestr = "2016-12-07 00:00:00";
+	private static final String dateStartStr = "2017-03-15 00:00:00";
+	private static final String dateEndStr = "2066-06-6 06:06:06";
 	private static final String format = "yyyy-MM-dd HH:mm:ss";
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception{
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		long dateStart = sdf.parse(dateStartStr).getTime();
+		long dateEnd = sdf.parse(dateEndStr).getTime();
+
+
+
 //		long systime = System.currentTimeMillis();
 //		System.out.println(systime);
 //		System.out.println(Long.toHexString(systime));
