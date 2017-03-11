@@ -2,11 +2,11 @@ package uuidGenerate;
 
 import java.io.IOException;
 
-public class Hex {
+public class HexUtil {
 	
 	private static final char[] DIGITS = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
 
-    public Hex() {
+    public HexUtil() {
     }
 
     public static Appendable append(Appendable a, short in) {
