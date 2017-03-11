@@ -44,6 +44,7 @@ public class UUIDTest {
                 List<String> list = new ArrayList<>();
                 Map<String, String> map = new HashMap<>(1000000);
                 Thread.sleep(2000);
+                //对比是否有重复，数目相同则每重复
                 for (Future<String> item : results) {
                     try {
                         String tem = item.get();
@@ -59,7 +60,7 @@ public class UUIDTest {
                 e.printStackTrace();
             }
         }
-        System.out.println(String.format("完成10次的平均时间为%d", avgTime / 10));
+        System.out.println(String.format("完成10次的平均时间为%d毫秒", avgTime / 10));
 
     }
 
