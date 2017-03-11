@@ -71,7 +71,7 @@ public class TimeServerNumGen {
     public static long getserverFlagId() {
         return serverFlagId;
     }
-      //加锁
+    //加锁
 //    public static synchronized long createTime() {
 //        long currentTime = DateUtil.timeGenerate();
 //        //服务器时钟后退，循环到大于等于上次的时间
@@ -110,7 +110,6 @@ public class TimeServerNumGen {
     /**
      * 不加锁 为了createTime()该方法是静态的，所有的静态变量实现同步，使用静态原子类，
      * 若想使createTime()不为静态，则变量都使用实例变量,同时方法加锁，且只弄成单例子
-     *
      */
     public static long createTime() {
         //当前时间等于上次生成id时间，需要在同一毫秒内进行序列id的自增
@@ -140,7 +139,7 @@ public class TimeServerNumGen {
                         }
                     }
                 } else if (sequenceId.compareAndSet(currentSequenceId, resultSequenceId)) {
-                   //时间不用更改
+                    //时间不用更改
                     break;
                 }
             } else if (lastTime.compareAndSet(lastGenerateTime, currentTime)) {
