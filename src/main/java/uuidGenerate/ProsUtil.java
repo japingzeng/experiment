@@ -16,7 +16,7 @@ import java.util.Properties;
 public class ProsUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProsUtil.class);
-    public static Properties loadProps(String fileName) {
+    public static Properties loadProps(String fileName) throws Exception{
         Properties props = null;
         InputStream is = null;
         try {
@@ -28,6 +28,7 @@ public class ProsUtil {
             props.load(is);
         } catch (IOException e) {
             LOGGER.error("***[加载配置文件失败]***", e);
+            throw e;
         } finally {
             if (null != is) {
                 try {

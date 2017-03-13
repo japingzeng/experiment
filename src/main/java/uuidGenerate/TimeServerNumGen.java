@@ -17,6 +17,11 @@ import java.util.Enumeration;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicLong;
 
+/**
+ * @Author japing
+ * @Date 2017/3/13 9:18
+ * @Description:
+ */
 public class TimeServerNumGen {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TimeServerNumGen.class);
@@ -182,10 +187,14 @@ public class TimeServerNumGen {
     }
 
     static {
-        Properties pros = ProsUtil.loadProps("UUIDConfig.properties");
-        if (null != pros) {
-            clusterId = ProsUtil.getLong(pros, "jimi.ws.clusterId");
-            taskId = ProsUtil.getLong(pros, "jimi.ws.taskId");
+        try {
+            Properties pros = ProsUtil.loadProps("UUIDConfig.properties");
+            if (null != pros) {
+                clusterId = ProsUtil.getLong(pros, "jimi.ws.clusterId");
+                taskId = ProsUtil.getLong(pros, "jimi.ws.taskId");
+            }
+        } catch (Exception e) {
+            LOGGER.error("***[加载UUIDConfig.properties失败]***", e);
         }
     }
 
@@ -269,7 +278,7 @@ public class TimeServerNumGen {
                 serverFlagId |= (long) (Math.random() * 2.147483647E9D);
             }
         }
-        //增加随机，避免相同应用在同一台服务器上有多个实例
+        //增加随机，避免在同一台服务器上有多个实例
         serverFlagId |= (long) (Math.random() * 65535) << 48;
     }
 
