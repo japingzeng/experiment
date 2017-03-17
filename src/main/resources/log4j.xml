@@ -17,12 +17,12 @@
     </appender>
 
     <!-- 自定义一个logger additivity指示是否遵循缺省的继承机制-->
-    <logger name="uuidGenerate" additivity="false">
+    <logger name="nettyTest" additivity="false">
         <level value="debug" />
         <appender-ref ref="File" />
     </logger>
 
-    <logger name="uuidGenerate" additivity="false">
+    <logger name="nettyTest" additivity="false">
         <level value="debug" />
         <appender-ref ref="Console" />
     </logger>

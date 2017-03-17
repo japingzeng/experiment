@@ -19,4 +19,15 @@ public class Hello implements IHello {
 		
 	}
 
+	public static void main(String[] args) {
+
+
+		Class<?>  cl = new Hello().getClass();
+		Class[] interfaces = cl.getInterfaces();
+		System.out.println(cl);
+		for (Class item : interfaces) {
+			System.out.println(item);
+		}
+	}
+
 }
