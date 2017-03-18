@@ -1,18 +1,5 @@
-package nettyTest;
+package nettyTest.NIOTest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
-import java.nio.channels.SelectionKey;
-import java.nio.channels.Selector;
-import java.nio.channels.ServerSocketChannel;
-import java.nio.channels.SocketChannel;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.Set;
 
 /**
  * @Author japing

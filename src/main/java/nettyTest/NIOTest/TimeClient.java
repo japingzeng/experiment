@@ -1,4 +1,4 @@
-package nettyTest;
+package nettyTest.NIOTest;
 
 /**
  * @Author japing

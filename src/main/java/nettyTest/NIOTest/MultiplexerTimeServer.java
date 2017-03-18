@@ -1,4 +1,4 @@
-package nettyTest;
+package nettyTest.NIOTest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +27,7 @@ public class MultiplexerTimeServer implements Runnable{
     private volatile boolean stop;
 
     /**
-     * 初始化多路复用器、绑定坚挺端口
+     * 初始化多路复用器、绑定监听端口
      * @param port
      */
     public MultiplexerTimeServer(int port) {
@@ -96,7 +96,6 @@ public class MultiplexerTimeServer implements Runnable{
                 // Add the new connection to the selector
                 sc.register(selector, SelectionKey.OP_READ);
             }
-
             if (key.isReadable()) {
                 //read the data
                 SocketChannel sc = (SocketChannel)key.channel();
@@ -118,7 +117,6 @@ public class MultiplexerTimeServer implements Runnable{
                     ; //读到0字节，忽略
                 }
             }
-
         }
     }
 
@@ -129,6 +127,43 @@ public class MultiplexerTimeServer implements Runnable{
             writeBuffer.put(bytes);
             writeBuffer.flip();
             sc.write(writeBuffer);
+        }
+    }
+
+    /**
+     * @Author japing
+     * @Date 2017/3/17 11:44
+     * @Description:
+     */
+    public static class TimeServer {
+
+        public static void main(String[] args) {
+            int port = 8080;
+            if (null != args && args.length > 0) {
+                port = Integer.valueOf(args[0]);
+            }
+
+            MultiplexerTimeServer timeServer = new MultiplexerTimeServer(port);
+            new Thread(timeServer, "NIO-MultiplexerTimeServer-001").start();
+        }
+    }
+
+    /**
+     * @Author japing
+     * @Date 2017/3/17 14:57
+     * @Description:
+     */
+    public static class TimeClient {
+
+        public static void main(String[] args) {
+            int port = 8080;
+            if (null != args && args.length > 0) {
+                port = Integer.valueOf(args[0]);
+            }
+
+            nettyTest.AioTest.TimeClientHandle timeClientHandle = new nettyTest.AioTest.TimeClientHandle("127.0.0.1", port);
+            new Thread(timeClientHandle, "TimeClientHandle").start();
+
         }
     }
 }

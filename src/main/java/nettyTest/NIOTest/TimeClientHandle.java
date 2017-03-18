@@ -1,11 +1,10 @@
-package nettyTest;
+package nettyTest.NIOTest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
@@ -130,6 +129,5 @@ public class TimeClientHandle implements Runnable {
             LOGGER.info("Send order 2 server succeed.");
         }
     }
-
 }
 
