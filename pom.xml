@@ -92,11 +92,17 @@
 			<version>${cglib.version}</version>
 		</dependency>
 
+		<!--<dependency>-->
+			<!--<groupId>io.netty</groupId>-->
+			<!--<artifactId>netty-all</artifactId>-->
+			<!--<version>4.1.8.Final</version>-->
+		<!--</dependency>-->
 		<dependency>
 			<groupId>io.netty</groupId>
 			<artifactId>netty-all</artifactId>
-			<version>4.1.8.Final</version>
+			<version>5.0.0.Alpha1</version>
 		</dependency>
+
 	</dependencies>
 
 
