@@ -32,6 +32,7 @@
           <element id="library" level="project" name="Maven: cglib:cglib:2.2" />
           <element id="library" level="project" name="Maven: asm:asm:3.1" />
           <element id="library" level="project" name="Maven: io.netty:netty-all:5.0.0.Alpha1" />
+          <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.0.2" />
         </element>
       </element>
       <element id="directory" name="META-INF">

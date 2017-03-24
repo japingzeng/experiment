@@ -18,14 +18,14 @@ import java.util.Date;
 public class TimeServerHandler extends ChannelHandlerAdapter{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TimeServerHandler.class);
-
+    private int counter;
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         ByteBuf buf = (ByteBuf)msg;
         byte[] req = new byte[buf.readableBytes()];
         buf.readBytes(req);
         String body = new String(req, "UTF-8");
-        LOGGER.info("the time server receive order: " + body);
+        LOGGER.info("the time server receive order: " + body + "; the counter is : " + ++counter);
         String currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body) ? new Date(System.currentTimeMillis()).toString() : "BAD ORDER";
         ByteBuf resp = Unpooled.copiedBuffer(currentTime.getBytes());
         ctx.write(resp);

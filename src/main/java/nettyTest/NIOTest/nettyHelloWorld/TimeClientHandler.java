@@ -16,17 +16,20 @@ public class TimeClientHandler extends ChannelHandlerAdapter{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TimeClientHandler.class);
 
-    private final ByteBuf firstMessage;
+    private byte[] req;
 
     public TimeClientHandler() {
-        byte[] req = "QUERY TIME ORDER".getBytes();
-        firstMessage = Unpooled.buffer(req.length);
-        firstMessage.writeBytes(req);
+       req = "QUERY TIME ORDER".getBytes();
     }
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        ctx.writeAndFlush(firstMessage);
+        ByteBuf firstMessage = null;
+        for (int i=0; i < 100; i++) {
+            firstMessage = Unpooled.buffer(req.length);
+            firstMessage.writeBytes(req);
+            ctx.writeAndFlush(firstMessage);
+        }
     }
 
     @Override

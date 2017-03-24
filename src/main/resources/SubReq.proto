@@ -1,0 +1,8 @@
+syntax = "proto2";
+option java_package = "codec.potobuf";
+option java_outer_classname = "SubReqProto";
+
+message SubReq {
+	required string userName = 1;
+	required int32 userId = 2;
+}
