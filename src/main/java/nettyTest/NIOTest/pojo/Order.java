@@ -2,6 +2,7 @@ package nettyTest.NIOTest.pojo;
 
 /**
  * Order information.
+ * E:\JD\software\development_software\jibx_1_3_1\jibx
  */
 public class Order{
     private long orderNumber;

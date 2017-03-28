@@ -149,6 +149,28 @@
                 </configuration>
             </plugin>
 
+			<plugin><!-- 生成jibx class信息 -->
+				<groupId>org.jibx</groupId>
+				<artifactId>jibx-maven-plugin</artifactId>
+				<version>1.2.6</version>
+				<configuration>
+					<schemaBindingDirectory>${basedir}/target/classes/</schemaBindingDirectory>
+					<includeSchemaBindings>
+						<includeSchemaBindings>*bind.xml</includeSchemaBindings>
+					</includeSchemaBindings>
+					<verbose>true</verbose>
+				</configuration>
+				<executions>
+					<execution>
+						<id>jibx-bind</id>
+						<phase>compile</phase><!--把jibx绑定到了comile编译阶段 -->
+						<goals>
+							<goal>bind</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
         </plugins>
     </build>
 
