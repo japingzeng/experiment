@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/experiment.iml" filepath="$PROJECT_DIR$/experiment.iml" />
-      <module fileurl="file://$PROJECT_DIR$/service/service.iml" filepath="$PROJECT_DIR$/service/service.iml" />
+      <module fileurl="file://E:\code\myGit\experiment\service\service.iml" filepath="E:\code\myGit\experiment\service\service.iml" />
     </modules>
   </component>
 </project>

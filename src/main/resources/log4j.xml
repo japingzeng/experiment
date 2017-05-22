@@ -27,6 +27,11 @@
         <appender-ref ref="Console" />
     </logger>
 
+    <logger name="topic" additivity="false">
+        <level value="debug" />
+        <appender-ref ref="Console" />
+    </logger>
+
     <!--根设置-->
     <root>
         <priority value="DEBUG"/>
