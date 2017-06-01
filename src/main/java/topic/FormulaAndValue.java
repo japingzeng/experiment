@@ -7,16 +7,7 @@ package topic;
  */
 public class FormulaAndValue {
 
-    private String formula;
     private OperateNumber value;
-
-    public String getFormula() {
-        return formula;
-    }
-
-    public void setFormula(String formula) {
-        this.formula = formula;
-    }
 
     public OperateNumber getValue() {
         return value;

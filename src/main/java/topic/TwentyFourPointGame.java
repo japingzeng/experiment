@@ -21,7 +21,6 @@ public class TwentyFourPointGame {
     private static final String MULTIPLY = "*";
     private static final String DIVISION = "/";
     private static Map<String, Object> resultMap = new HashMap<>();
-    private static final String  NULL_FORMULA = "";
 
     public TwentyFourPointGame(int[] inputNumber) {
         init(inputNumber);
@@ -30,7 +29,6 @@ public class TwentyFourPointGame {
     private void init(int[] inputNumber) {
         if (null != inputNumber) {
             inputNumbers = new OperateNumber[inputNumber.length];
-            List<OperateNumber> list = new ArrayList<>();
             for ( int i = 0; i < inputNumber.length; i++) {
                 OperateNumber num = new OperateNumber(inputNumber[i], 0);
                 inputNumbers[i] = num;
@@ -38,11 +36,14 @@ public class TwentyFourPointGame {
         }
     }
 
-    public void canlculate24Point(int n, String formula) {
+    public void canlculate24Point(int n) {
         if (n == 1) {
             if (POINT_24 == inputNumbers[0].getAint()) {
-                resultMap.put(formula, inputNumbers[0].getAint());
-                LOGGER.info("***[formula= {}, value= {}]***", formula, inputNumbers[0].getAint());
+                if (resultMap.containsKey(inputNumbers[0].getExpression())) {
+                    LOGGER.info("***[formula= {}, value= {}]，重复！！！***", inputNumbers[0].getExpression(), inputNumbers[0].getAint());
+                }
+                resultMap.put(inputNumbers[0].getExpression(), inputNumbers[0].getAint());
+                LOGGER.info("***[formula= {}, value= {}]***", inputNumbers[0].getExpression(), inputNumbers[0].getAint());
             }
             return;
         }
@@ -53,52 +54,52 @@ public class TwentyFourPointGame {
                 FormulaAndValue formulaAndValue = null;
                 //计算 a + b
                 inputNumbers[j] = inputNumbers[n-1];
-                formulaAndValue= computation("+", formula, numberA, numberB);
+                formulaAndValue= computation("+", numberA, numberB);
                 inputNumbers[i] = formulaAndValue.getValue();
-                canlculate24Point(n-1, formulaAndValue.getFormula());
+                canlculate24Point(n-1);
                 //还原
                 inputNumbers[i] = numberA;
                 inputNumbers[j] = numberB;
                 //计算 a -b
                 inputNumbers[j] = inputNumbers[n-1];
-                formulaAndValue= computation("-", formula, numberA, numberB);
+                formulaAndValue= computation("-", numberA, numberB);
                 inputNumbers[i] = formulaAndValue.getValue();
-                canlculate24Point(n-1, formulaAndValue.getFormula());
+                canlculate24Point(n-1);
                 //还原
                 inputNumbers[i] = numberA;
                 inputNumbers[j] = numberB;
                 //计算 b -a
                 inputNumbers[j] = inputNumbers[n-1];
-                formulaAndValue= computation("-", formula, numberB, numberA);
+                formulaAndValue= computation("-", numberB, numberA);
                 inputNumbers[i] = formulaAndValue.getValue();
-                canlculate24Point(n-1, formulaAndValue.getFormula());
+                canlculate24Point(n-1);
                 //还原
                 inputNumbers[i] = numberA;
                 inputNumbers[j] = numberB;
                 //计算 a * b
                 inputNumbers[j] = inputNumbers[n-1];
-                formulaAndValue= computation("*", formula, numberA, numberB);
+                formulaAndValue= computation("*", numberA, numberB);
                 inputNumbers[i] = formulaAndValue.getValue();
-                canlculate24Point(n-1, formulaAndValue.getFormula());
+                canlculate24Point(n-1);
                 //还原
                 inputNumbers[i] = numberA;
                 inputNumbers[j] = numberB;
                 //计算 a / b
                 if (0 != numberB.getAint()) {
                     inputNumbers[j] = inputNumbers[n-1];
-                    formulaAndValue= computation("/", formula, numberA, numberB);
+                    formulaAndValue= computation("/", numberA, numberB);
                     inputNumbers[i] = formulaAndValue.getValue();
-                    canlculate24Point(n-1, formulaAndValue.getFormula());
+                    canlculate24Point(n-1);
                 }
                 //还原
                 inputNumbers[i] = numberA;
                 inputNumbers[j] = numberB;
                 //计算 b / a
                 if (0 != numberA.getAint()) {
-                    inputNumbers[j] = inputNumbers[n-1];
-                    formulaAndValue= computation("/", formula, numberB, numberA);
+                    formulaAndValue= computation("/", numberB, numberA);
                     inputNumbers[i] = formulaAndValue.getValue();
-                    canlculate24Point(n-1, formulaAndValue.getFormula());
+                    inputNumbers[j] = inputNumbers[n-1];
+                    canlculate24Point(n-1);
                 }
                 //结束一次循环，还原inputNumber[i] inputNumber[j]
                 inputNumbers[i] = numberA;
@@ -107,55 +108,49 @@ public class TwentyFourPointGame {
         }
     }
 
-    private FormulaAndValue computation(String operator, String formula, OperateNumber a, OperateNumber b) {
+    private FormulaAndValue computation(String operator, OperateNumber a, OperateNumber b) {
         int result = Integer.MIN_VALUE;
         FormulaAndValue formulaAndValue = new FormulaAndValue();
         String expression = "";
         switch (operator) {
             case PLUS : {
                 result = a.getAint() + b.getAint();
-                expression = constructFormula(operator, formula, a, b);
+                expression = constructFormula(operator, a, b);
                 break;
             }
             case MINUS : {
                 result = a.getAint() - b.getAint();
-                expression = constructFormula(operator, formula, a, b);
+                expression = constructFormula(operator, a, b);
                 break;
             }
             case MULTIPLY : {
                 result = a.getAint() * b.getAint();
-                expression = constructFormula(operator, formula, a, b);
+                expression = constructFormula(operator, a, b);
                 break;
             }
             case DIVISION : {
                 result = a.getAint() / b.getAint();
-                expression = constructFormula(operator, formula, a, b);
+                expression = constructFormula(operator, a, b);
                 break;
             }
         }
-        formulaAndValue.setFormula(expression);
-        OperateNumber operateNumber = new OperateNumber(result, 1);
+        OperateNumber operateNumber = new OperateNumber(result, OperateNumber.getINTERMEDIATE());
+        operateNumber.setExpression(expression);
         formulaAndValue.setValue(operateNumber);
         return formulaAndValue;
     }
 
-    private String constructFormula(String operator, String formula, OperateNumber a, OperateNumber b) {
+    private String constructFormula(String operator, OperateNumber a, OperateNumber b) {
         String expression = "";
-        if (NULL_FORMULA.equals(formula)) {
-            expression = "(" + String.valueOf(a.getAint()) + operator + String.valueOf(b.getAint())  + ")";
-        } else {
-            if (a.getFlag() == OperateNumber.getORIGIN()) {
-                expression = "(" + formula + operator + String.valueOf(a.getAint())  + ")";
-            } else {
-                expression = "(" + formula + operator + String.valueOf(b.getAint())  + ")";
-            }
-        }
+        expression = (OperateNumber.getORIGIN() == a.getFlag() ? String.valueOf(a.getAint()) : a.getExpression()) + operator
+                     + (OperateNumber.getORIGIN() == b.getFlag() ? String.valueOf(b.getAint()) : b.getExpression());
+        expression = "(" + expression + ")";
         return expression;
     }
 
     public static void main(String[] args) {
         int[] numbers = new int[] {10, 14, 1, 1};
         TwentyFourPointGame twentyFourPointGame = new TwentyFourPointGame(numbers);
-        twentyFourPointGame.canlculate24Point(4, "");
+        twentyFourPointGame.canlculate24Point(4);
     }
 }

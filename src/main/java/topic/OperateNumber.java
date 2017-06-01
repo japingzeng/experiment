@@ -15,6 +15,8 @@ public class OperateNumber {
      */
     private int flag;
 
+    private String expression;
+
     public OperateNumber(int aint, int flag) {
         this.aint = aint;
         this.flag = flag;
@@ -42,5 +44,13 @@ public class OperateNumber {
 
     public static int getINTERMEDIATE() {
         return INTERMEDIATE;
+    }
+
+    public String getExpression() {
+        return expression;
+    }
+
+    public void setExpression(String expression) {
+        this.expression = expression;
     }
 }

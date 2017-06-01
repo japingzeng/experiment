@@ -62,7 +62,7 @@ public class FindRecursion {
                                             retList.add(findObject(new LinkNode(linkNode, temp), list, index+1));
                                         }
                                     }
-                                } else if (isJavaType(field.getType())) {
+                                } else if (unJavaType(field.getType())) {
                                     retList.add(findObject(new LinkNode(linkNode, val), list, index+1));
                                 }
                                 list.remove(targetObject);
@@ -101,12 +101,12 @@ public class FindRecursion {
     private static boolean isJavaObject(Object object) {
         boolean ret = true;
         if (null != object) {
-            ret = isJavaType(object.getClass());
+            ret = unJavaType(object.getClass());
         }
         return ret;
     }
 
-    private static boolean isJavaType(Class<?> cls) {
+    private static boolean unJavaType(Class<?> cls) {
         boolean ret = true;
         if(cls != null){
             if("int".equals(cls.getName())){
