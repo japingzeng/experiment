@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
 import java.util.Enumeration;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * Created by Administrator on 2017/6/18.
@@ -28,7 +29,6 @@ public class testResources {
                         return file1.isDirectory() || file1.isFile();
                     }
                 });
-
                 for (File item : files) {
                     System.out.println(item.getName());
                 }
